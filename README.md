@@ -1,2 +1,2 @@
 # Multiplayer-First-Person-Shooter
-A multiplayer first-person shooting game made in Unreal Engine 5
+A multiplayer first-person shooter game made in Unreal Engine 5
