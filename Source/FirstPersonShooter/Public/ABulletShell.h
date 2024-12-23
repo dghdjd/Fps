@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Kismet/GameplayStatics.h"
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "ABulletShell.generated.h"
 
@@ -25,13 +26,28 @@ public:
 	UPROPERTY(EditAnywhere, Category = "ShellMesh")
 	UStaticMeshComponent* ShellMesh;
 
-	UPROPERTY(EditAnywhere, Category = "ProjectileComponent")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "ProjectileComponent")
 	UProjectileMovementComponent* ProjectileComponent;
 
-	UFUNCTION(BlueprintCallable, Category = "Ejection")
-	void SetEjectionVelocity(FVector EjectionDirection, float EjectionSpeed);
+	UPROPERTY(BlueprintReadWrite, Category = "Sound")
+	bool bHasPlayedSound;
 
-	//void EjectShell(FVector EjectionDirection, float EjectionSpeed);
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Sound")
+	USoundBase* SoundEffect1;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Sound")
+	USoundBase* SoundEffect2;
+
+
+
+
+	UFUNCTION()
+	void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
+
+	UFUNCTION()
+	virtual void OnConstruction(const FTransform& Transform) override;
+
+
 
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
